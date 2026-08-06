@@ -1,0 +1,238 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+<a href="{% url 'home' %}" class="logo">
+
+    <img src="{% static 'images/logo.jpg' %}" alt="عطاری غواصه">
+
+</a>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="header-container">
+
+        <div class="header-right">
+
+            <a href="{% url 'home' %}" class="logo">
+
+    <a href="{% url 'home' %}" class="brand-logo">
+    عطاری غواصه 🌿
+</a>
+
+</a>
+
+        </div>
+
+{% if user.is_authenticated %}
+
+<a href="{% url 'dashboard' %}" class="header-profile">
+
+
+    {% if user.profile.profile_image %}
+
+        <img src="{{ user.profile.profile_image.url }}" 
+             class="header-profile-img">
+
+    {% else %}
+
+        <div class="header-default-img">
+            
+        </div>
+
+    {% endif %}
+
+
+    <span>
+        پروفایل
+    </span>
+
+
+</a>
+
+
+{% else %}
+
+<a href="{% url 'login' %}" class="header-login">
+    ورود
+</a>
+
+
+<a href="{% url 'register' %}" class="header-register">
+    ثبت نام
+</a>
+
+
+{% endif %}
+
+
+        <nav class="header-center">
+
+            <a href="{% url 'home' %}">
+                خانه
+            </a>
+
+            <a href="{% url 'product_list' %}">
+محصولات
+</a>
+
+            <a href="{% url 'cart_detail' %}">
+                🛒 سبد خرید
+            </a>
+
+        </nav>
+
+
+
+        <div class="header-left">
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'dashboard' %}">
+                     {{ request.user.username }}
+                </a>
+
+                
+            {% else %}
+
+                <a href="{% url 'login' %}">
+                    ورود
+                </a>
+
+                <a href="{% url 'register' %}">
+                    ثبت نام
+                </a>
+
+            {% endif %}
+            <form class="header-search" 
+method="get"
+action="{% url 'product_list' %}">
+
+
+<input 
+type="text"
+name="q"
+placeholder="جستجوی محصولات..."
+>
+
+
+<button>
+🔍
+</button>
+
+</form>
+
+
+
+        </div>
+
+    </div>
+    
+</header>
+
+<main>
+
+{% block content %}
+
+{% endblock %}
+
+</main>
+
+
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div>
+
+                <h2>
+
+                    عطاری غواصه
+
+                </h2>
+
+                <p>
+
+                    عرضه کننده انواع ادویه،
+                    گیاهان دارویی،
+                    روغن های طبیعی
+                    و دمنوش
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    ارتباط با ما
+
+                </h3>
+
+                <p>
+
+                    شیراز
+                    بازار وکیل
+                    سرای مشیر
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    شبکه های اجتماعی
+
+                </h3>
+
+                <p>
+
+                    Instagram
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<script src="{% static 'js/app.js' %}"></script>
+
+</body>
+
+</html>
+<div class="header-left">
+

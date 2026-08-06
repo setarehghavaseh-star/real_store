@@ -1,0 +1,245 @@
+{% extends "products/base.html" %}
+
+{% load static %}
+
+{% block title %}
+{{ product.name }}
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="product-detail">
+
+<div class="container">
+
+
+<div class="detail-wrapper">
+
+
+<!-- تصاویر -->
+
+<div class="detail-images">
+
+
+{% if product.images.all %}
+
+{% for image in product.images.all %}
+
+<img 
+src="{{ image.image.url }}"
+alt="{{ product.name }}"
+class="main-product-image">
+
+{% endfor %}
+
+
+{% else %}
+
+<img 
+src="{% static 'images/no-image.png' %}"
+class="main-product-image">
+
+
+{% endif %}
+
+
+</div>
+
+
+
+<!-- اطلاعات محصول -->
+
+<div class="detail-info">
+
+
+<span class="category">
+
+{{ product.category.name }}
+
+</span>
+
+
+<h1>
+
+{{ product.name }}
+
+</h1>
+
+
+
+<p class="short">
+
+{{ product.short_description }}
+
+</p>
+
+
+
+<div class="price-box">
+
+
+{% for variant in product.variants.all %}
+
+<div class="variant">
+
+
+<span>
+
+{{ variant.weight }}
+
+</span>
+
+
+<strong>
+
+{{ variant.price }}
+
+تومان
+
+</strong>
+
+
+</div>
+
+
+{% endfor %}
+
+
+</div>
+
+
+
+
+<div class="description">
+
+
+<h3>
+
+توضیحات محصول
+
+</h3>
+
+
+<p>
+
+{{ product.description }}
+
+</p>
+
+
+</div>
+
+
+
+<div class="features">
+
+
+<div>
+
+🌿 کیفیت:
+
+{{ product.quality }}
+
+</div>
+
+
+<div>
+
+📦 بسته بندی:
+
+{{ product.pack_type }}
+
+</div>
+
+
+</div>
+
+
+
+{% for variant in product.variants.all %}
+
+<div class="weight-option">
+
+    <span>
+        {{ variant.weight }}
+    </span>
+
+
+    <a href="{% url 'add_to_cart' variant.id %}">
+        افزودن به سبد خرید
+    </a>
+
+</div>
+
+{% endfor %}
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<section class="related-products">
+
+<div class="container">
+
+
+<div class="related-title">
+
+<h2>
+محصولات مرتبط
+</h2>
+
+</div>
+
+
+
+<div class="related-list">
+
+
+{% for item in related_products %}
+
+
+<a href="{% url 'product_detail' item.slug %}"
+class="related-item">
+
+
+{% if item.images.first %}
+
+<img src="{{ item.images.first.image.url }}"
+alt="{{ item.name }}">
+
+{% endif %}
+
+
+
+<span>
+
+{{ item.name }}
+
+</span>
+
+
+</a>
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+{% endblock %}

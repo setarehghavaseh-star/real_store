@@ -1,0 +1,163 @@
+{% extends "products/base.html" %}
+
+{% block title %}
+
+{{ category.name }}
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<section class="category-page">
+
+
+<div class="container">
+
+
+
+<div class="category-header">
+
+
+<h1>
+
+{{ category.name }}
+
+</h1>
+
+
+<p>
+
+محصولات موجود در این دسته‌بندی
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="products-grid">
+
+
+
+{% for product in products %}
+
+
+
+<div class="product-card">
+
+
+
+<div class="image-box">
+
+
+{% if product.images.first %}
+
+
+<img
+
+src="{{ product.images.first.image.url }}"
+
+alt="{{ product.name }}">
+
+
+
+{% endif %}
+
+
+
+</div>
+
+
+
+
+<div class="product-content">
+
+
+
+<h3>
+
+{{ product.name }}
+
+</h3>
+
+
+
+<p>
+
+{{ product.short_description }}
+
+</p>
+
+
+
+
+<div class="price">
+
+
+{% if product.variants.first %}
+
+{{ product.variants.first.price }}
+
+تومان
+
+{% endif %}
+
+
+</div>
+
+
+
+
+<a
+
+href="{% url 'product_detail' product.slug %}"
+
+class="card-btn">
+
+
+مشاهده محصول
+
+
+</a>
+
+
+
+</div>
+
+
+</div>
+
+
+
+{% empty %}
+
+
+<h2>
+
+محصولی در این دسته وجود ندارد
+
+</h2>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+{% endblock %}

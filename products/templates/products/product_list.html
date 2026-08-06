@@ -1,0 +1,108 @@
+{% extends "products/base.html" %}
+
+
+{% block title %}
+محصولات
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<section class="products-page">
+
+
+<div class="container">
+
+
+<h1 class="products-title">
+🌿 محصولات عطاری غواصه
+</h1>
+
+
+
+{% if products %}
+
+
+<div class="products-grid">
+
+
+{% for product in products %}
+
+
+
+<div class="product-card">
+
+<div class="product-image-box">
+
+{% with product.images.first as img %}
+
+{% if img %}
+
+<img 
+src="{{ img.image.url }}"
+alt="{{ product.name }}"
+>
+
+{% else %}
+
+<div class="no-image">
+🌿
+</div>
+
+{% endif %}
+
+{% endwith %}
+
+</div>
+
+
+<h3>
+{{ product.name }}
+</h3>
+
+
+<p>
+{{ product.price }} تومان
+</p>
+
+
+
+<a href="{% url 'product_detail' product.slug %}">
+مشخصات محصول
+</a>
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+</div>
+
+
+
+{% else %}
+
+
+<div class="empty-products">
+
+محصولی پیدا نشد 🌿
+
+</div>
+
+
+{% endif %}
+
+
+
+</div>
+
+
+</section>
+
+
+{% endblock %}

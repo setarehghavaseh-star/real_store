@@ -1,0 +1,88 @@
+{% extends "products/base.html" %}
+{% load static %}
+
+{% block title %}
+ورود
+{% endblock %}
+
+{% block content %}
+
+<div class="login-page">
+
+    <div class="login-card">
+
+        <h2>ورود به حساب کاربری</h2>
+
+        <p class="subtitle">
+            برای ادامه خرید وارد حساب خود شوید.
+        </p>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <div class="input-group">
+
+                <label>شماره موبایل</label>
+
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="09xxxxxxxxx"
+                    required
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>رمز عبور</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="رمز عبور"
+                    required
+                >
+
+            </div>
+
+
+            {% if form.errors %}
+
+            <div class="login-error">
+
+                شماره موبایل یا رمز عبور اشتباه است.
+
+            </div>
+
+            {% endif %}
+
+
+            <button type="submit">
+
+                ورود
+
+            </button>
+
+        </form>
+
+
+        <div class="register-link">
+
+            حساب ندارید؟
+
+            <a href="{% url 'register' %}">
+
+                ثبت نام
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}c

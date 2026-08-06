@@ -1,0 +1,281 @@
+{% extends "products/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+<div class="dashboard-wrapper">
+
+
+    <!-- Sidebar -->
+
+    <aside class="dashboard-sidebar">
+
+
+        <div class="profile-mini">
+
+            {% if profile.profile_image %}
+
+            <img src="{{ profile.profile_image.url }}" alt="profile">
+
+            {% else %}
+
+            <div class="default-avatar">
+                🌿
+            </div>
+
+            {% endif %}
+
+
+            <h3>
+                {{ user.first_name }} {{ user.last_name }}
+            </h3>
+
+            <p>
+                {{ user.phone_number }}
+            </p>
+
+
+        </div>
+
+
+
+        <nav class="dashboard-menu">
+
+
+            <a class="active">
+                👤 پروفایل من
+            </a>
+
+
+            
+<a href="{% url 'orders' %}">
+📦 سفارش‌های من
+</a>
+
+
+            <a href="{% url 'favorites' %}">
+❤️ علاقه‌مندی‌ها
+</a>
+
+
+            
+<a href="{% url 'addresses' %}">
+📍 آدرس‌ها
+</a>
+
+
+            
+<a href="{% url 'security' %}">
+🔐 امنیت حساب
+</a>
+
+
+            <a href="{% url 'settings' %}">
+⚙ تنظیمات
+</a>
+
+
+            <a href="{% url 'logout' %}">
+                🚪 خروج
+            </a>
+
+
+        </nav>
+
+
+    </aside>
+
+
+
+
+
+    <!-- Main -->
+
+
+    <main class="dashboard-main">
+
+
+        <div class="dashboard-title">
+
+            <h1>
+                داشبورد من 🌿
+            </h1>
+
+            <p>
+                اطلاعات حساب خودت را مدیریت کن
+            </p>
+
+        </div>
+
+
+
+
+        <section class="dashboard-card">
+
+
+            <h2>
+                اطلاعات شخصی
+            </h2>
+
+
+            <form method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+
+                <div class="form-grid">
+
+
+                    <div class="input-box">
+
+                        <label>
+                            نام
+                        </label>
+
+                        {{ user_form.first_name }}
+
+                    </div>
+
+
+
+                    <div class="input-box">
+
+                        <label>
+                            نام خانوادگی
+                        </label>
+
+                        {{ user_form.last_name }}
+
+                    </div>
+
+
+
+                    <div class="input-box">
+
+                        <label>
+                            ایمیل
+                        </label>
+
+                        {{ user_form.email }}
+
+                    </div>
+
+
+
+                    <div class="input-box">
+
+                        <label>
+                            تاریخ تولد
+                        </label>
+
+                        {{ profile_form.birth_date }}
+
+                    </div>
+
+
+                </div>
+
+
+
+                <h2 class="address-title">
+                    آدرس
+                </h2>
+
+
+
+                <div class="form-grid">
+
+
+
+                    <div class="input-box">
+
+                        <label>
+                            استان
+                        </label>
+
+                        {{ profile_form.province }}
+
+                    </div>
+
+
+
+                    <div class="input-box">
+
+                        <label>
+                            شهر
+                        </label>
+
+                        {{ profile_form.city }}
+
+                    </div>
+
+
+
+                    <div class="input-box">
+
+                        <label>
+                            کد پستی
+                        </label>
+
+                        {{ profile_form.postal_code }}
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="input-box full">
+
+                    <label>
+                        آدرس کامل
+                    </label>
+
+                    {{ profile_form.address }}
+
+                </div>
+
+
+
+
+                <div class="image-upload">
+
+
+                    <label>
+                        عکس پروفایل
+                    </label>
+
+
+                    {{ profile_form.profile_image }}
+
+
+                </div>
+
+
+
+
+                <button class="save-profile-btn">
+
+                    ذخیره تغییرات ✨
+
+                </button>
+
+
+            </form>
+
+
+        </section>
+
+
+    </main>
+
+
+
+</div>
+
+
+{% endblock %}

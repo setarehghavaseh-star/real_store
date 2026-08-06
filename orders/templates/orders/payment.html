@@ -1,0 +1,110 @@
+{% extends "products/base.html" %}
+
+
+{% block title %}
+پرداخت سفارش
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<section class="payment-page">
+
+
+<div class="payment-box">
+
+
+<h1>
+💳 پرداخت سفارش
+</h1>
+
+
+<h3>
+شماره سفارش:
+{{ order.id }}
+</h3>
+
+
+<h2>
+{{ order.total_price }}
+تومان
+</h2>
+
+
+<hr>
+
+
+<h3>
+پرداخت کارت به کارت
+</h3>
+
+
+<p>
+شماره کارت:
+</p>
+
+
+<h2>
+6037-9918-1234-5678
+</h2>
+
+
+<p>
+به نام:
+<br>
+عطاری غواصه 🌿
+</p>
+
+
+
+<form method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+
+
+<label>
+شماره پیگیری پرداخت
+</label>
+
+
+<input 
+type="text"
+name="payment_code"
+required
+>
+
+
+
+<label>
+تصویر رسید پرداخت
+</label>
+
+
+<input 
+type="file"
+name="payment_image"
+>
+
+
+
+<button type="submit">
+
+ارسال پرداخت
+
+</button>
+
+
+</form>
+
+
+
+</div>
+
+
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "products/base.html" %}
+
+{% block content %}
+{% load static%}
+<div class="account-security-page">
+
+    <div class="account-security-box">
+
+        <h1>
+            امنیت حساب
+        </h1>
+
+        <p>
+            از این بخش می‌توانید تنظیمات امنیتی حساب خود را مدیریت کنید.
+        </p>
+
+        <a href="{% url 'password_change' %}" class="account-security-btn">
+            تغییر رمز عبور
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,173 @@
+{% extends "products/base.html" %}
+
+{% block title %}
+عطاری غواصه
+{% endblock %}
+
+{% block content %}
+{% load static%}
+
+<section class="hero">
+
+    <div class="hero-image">
+
+        <img src="{% static 'images/banner.jpeg' %}" alt="بنر عطاری">
+
+    </div>
+
+    <div class="hero-overlay">
+
+        
+
+        <a href="{% url 'product_list' %}" class="hero-btn">
+            مشاهده محصولات
+        </a>
+
+    </div>
+
+</section>
+<section class="category-section">
+
+<div class="container">
+
+<h2>
+
+دسته بندی ها
+
+</h2>
+
+<div class="category-wrapper">
+
+{% for category in categories %}
+
+<a href="{% url 'category_detail' category.slug %}" 
+class="category-item">
+
+
+    <div class="circle">
+
+        🌿
+
+    </div>
+
+
+    <h3>
+
+        {{ category.name }}
+
+    </h3>
+
+
+</a>
+
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section
+id="products"
+class="product-section">
+
+<div class="container">
+
+<div class="title-row">
+
+<h2>
+
+محصولات ویژه
+
+</h2>
+
+<p>
+
+جدیدترین محصولات عطاری غواصه
+
+</p>
+
+</div>
+
+
+
+<div class="products-grid">
+
+{% for product in products %}
+
+<div class="product-card">
+
+<div class="image-box">
+
+{% if product.images.first %}
+
+<img
+
+src="{{ product.images.first.image.url }}"
+
+alt="{{ product.name }}">
+
+{% else %}
+
+<img
+
+src="{% static 'images/no-image.png' %}">
+
+{% endif %}
+
+</div>
+
+
+
+<div class="product-content">
+
+<h3>
+
+{{ product.name }}
+
+</h3>
+
+
+
+<p>
+
+{{ product.short_description }}
+
+</p>
+
+
+
+<div class="price">
+
+{% if product.variants.first %}
+
+{{ product.variants.first.price }}
+
+تومان
+
+{% endif %}
+
+</div>
+
+
+
+<a href="{% url 'product_detail' product.slug %}">
+مشخصات محصول
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+
+{% endblock %}

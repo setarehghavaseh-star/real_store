@@ -1,0 +1,97 @@
+{% extends "products/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <aside class="dashboard-sidebar">
+
+        <div class="profile-box">
+
+            {% if profile.profile_image %}
+                <img src="{{ profile.profile_image.url }}" class="profile-image">
+            {% else %}
+                <img src="{% static 'images/default-user.png' %}" class="profile-image">
+            {% endif %}
+
+            <h3>
+
+                {{ request.user.first_name }}
+                {{ request.user.last_name }}
+
+            </h3>
+
+            <p>
+
+                {{ request.user.phone_number }}
+
+            </p>
+
+        </div>
+
+        <ul>
+
+            <li class="active">
+                اطلاعات شخصی
+            </li>
+
+            <li>
+                آدرس ها
+            </li>
+
+            <li>
+                سفارش های من
+            </li>
+
+            <li>
+                علاقه مندی ها
+            </li>
+
+            <li>
+                تغییر رمز
+            </li>
+
+            <li>
+
+                <a href="{% url 'logout' %}">
+
+                    خروج
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <section class="dashboard-content">
+
+        <h2>
+
+            اطلاعات شخصی
+
+        </h2>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {{ user_form.as_p }}
+
+            {{ profile_form.as_p }}
+
+            <button class="save-btn">
+
+                ذخیره اطلاعات
+
+            </button>
+
+        </form>
+
+    </section>
+
+</div>
+
+{% endblock %}

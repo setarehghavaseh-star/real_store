@@ -1,0 +1,220 @@
+{% extends "products/base.html" %}
+
+
+{% block title %}
+سبد خرید
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<section class="cart-page">
+
+<div class="container">
+
+
+<h1 class="cart-title">
+🛒 سبد خرید شما
+</h1>
+
+
+
+{% if cart.items.all %}
+
+
+
+<div class="cart-wrapper">
+
+
+{% for item in cart.items.all %}
+
+
+<div class="cart-card">
+
+
+
+<div class="cart-image">
+
+
+{% with image=item.variant.product.images.first %}
+
+{% if image %}
+
+<img src="{{ image.image.url }}" 
+alt="{{ item.variant.product.name }}">
+
+{% endif %}
+
+{% endwith %}
+
+
+
+</div>
+
+
+
+
+
+<div class="cart-details">
+
+
+<h3>
+{{ item.variant.product.name }}
+</h3>
+
+
+
+<div class="cart-tags">
+
+<span>
+🌿 {{ item.variant.product.category.name }}
+</span>
+
+
+<span>
+⚖️ {{ item.variant.weight }}
+</span>
+
+</div>
+
+
+
+<p>
+قیمت واحد:
+<strong>
+{{ item.variant.price }}
+تومان
+</strong>
+</p>
+
+
+
+
+<div class="cart-actions-row">
+
+
+
+<div class="quantity-box">
+
+
+<a href="{% url 'decrease_cart_item' item.id %}">
+−
+</a>
+
+
+<span>
+{{ item.quantity }}
+</span>
+
+
+
+<a href="{% url 'increase_cart_item' item.id %}">
++
+</a>
+
+
+</div>
+
+
+
+
+<a class="remove-btn"
+href="{% url 'remove_cart_item' item.id %}">
+🗑 حذف
+</a>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+<div class="cart-item-price">
+
+{{ item.total_price }}
+
+تومان
+
+
+</div>
+
+
+
+
+</div>
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+
+<div class="cart-bottom">
+
+    <h2 class="total-price">
+
+        جمع کل سفارش:
+        <span>{{ cart.total_price }} تومان</span>
+
+    </h2>
+
+</div>
+
+<a href="{% url 'home' %}"
+class="continue-btn">
+
+🛍 ادامه خرید
+
+</a>
+
+
+
+<a href="{% url 'checkout' %}" class="btn btn-success">
+💳 ادامه و ثبت سفارش
+</a>
+
+</div>
+
+
+
+</div>
+
+
+
+
+{% else %}
+
+
+
+<div class="empty-cart">
+
+سبد خرید شما خالی است 🌿
+
+
+</div>
+
+
+
+{% endif %}
+
+
+
+</div>
+
+</section>
+
+
+{% endblock %}

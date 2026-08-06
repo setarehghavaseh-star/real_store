@@ -1,0 +1,120 @@
+{% extends "products/base.html" %}
+
+
+{% block title %}
+<h1>CHECKOUT TESE</h1>
+تکمیل سفارش
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<section class="checkout-page">
+
+<div class="container">
+
+
+<h1>
+تکمیل سفارش 🛒
+</h1>
+
+
+
+<div class="checkout-box">
+
+
+<h3>
+محصولات سبد خرید
+</h3>
+
+
+
+{% for item in cart.items.all %}
+
+
+<div class="checkout-item">
+
+
+<div>
+
+<strong>
+{{ item.variant.product.name }}
+</strong>
+
+
+<p>
+وزن:
+{{ item.variant.weight }}
+</p>
+
+
+<p>
+تعداد:
+{{ item.quantity }}
+</p>
+
+
+</div>
+
+
+
+<div>
+
+{{ item.total_price }}
+
+تومان
+
+</div>
+
+
+</div>
+
+
+{% endfor %}
+
+
+
+
+<hr>
+
+
+
+<h2>
+
+جمع کل:
+
+{{ cart.total_price }}
+
+تومان
+
+</h2>
+
+
+
+<form method="post">
+
+{% csrf_token %}
+
+
+<button type="submit">
+
+ثبت سفارش
+
+</button>
+
+
+</form>
+
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+{% endblock %}

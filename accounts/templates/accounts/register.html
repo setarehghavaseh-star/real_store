@@ -1,0 +1,127 @@
+{% extends "products/base.html" %}
+
+{% block title %}
+ثبت نام
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="register-page">
+
+
+<div class="register-card">
+
+
+<h1>
+🌿 ساخت حساب کاربری
+</h1>
+
+
+<p class="register-subtitle">
+به جمع مشتریان عطاری غواصه خوش آمدید 💚
+</p>
+
+
+
+{% if messages %}
+
+{% for message in messages %}
+
+<div class="register-message">
+
+{{ message }}
+
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+
+
+<form method="post">
+
+{% csrf_token %}
+
+
+
+<div class="input-group">
+
+<label>
+📱 شماره موبایل
+</label>
+
+{{ form.phone_number }}
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>
+نام
+</label>
+
+{{ form.first_name }}
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>
+نام خانوادگی
+</label>
+
+{{ form.last_name }}
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>
+🔒 رمز عبور
+</label>
+
+{{ form.password1 }}
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>
+🔒 تکرار رمز عبور
+</label>
+
+{{ form.password2 }}
+
+</div>
+
+
+
+<button class="register-button">
+
+ثبت نام 🌱
+
+</button>
+
+
+</form>
+
+
+
+</div>
+
+
+</section>
+
+
+{% endblock %}
